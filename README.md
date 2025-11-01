@@ -17,7 +17,7 @@ Este projeto utiliza um arquivo `.ipynb` (Jupyter Notebook) que pode ser executa
 
 ---
 
-## 1. Execução no Google Colab (Recomendado para Iniciantes)
+## 1. Execução no Google Colab (Recomendado)
 
 ### Passo a Passo:
 1. **Acesse o Google Colab**  
