@@ -29,6 +29,4 @@ Este projeto utiliza um arquivo `.ipynb` (Jupyter Notebook) que pode ser executa
 
 3. **Configure o Ambiente**  
    - Conecte a uma runtime gratuita:  
-     Clique em `Conectar` no canto superior direito (usará recursos da Google)
-   - Para recursos premium (GPU/TPU):  
-     `Runtime` > `Change runtime type` > Selecione o hardware desejado
+     Clique em `Conectar` no canto superior direito (usará recursos da Google
