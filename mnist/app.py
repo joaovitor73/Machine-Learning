@@ -1,25 +1,32 @@
 import streamlit as st
 from streamlit_mnist_canvas import st_mnist_canvas
 import numpy as np
-from joblib import load
+import pickle
 
-st.subheader("Input")
+st.title("Reconhecimento de Dígitos 🧠")
+st.subheader("Desenhe um número abaixo:")
+
+# Canvas para desenhar o dígito
 result = st_mnist_canvas()
 
-model_sgd = load('models/model-sgd.pkl')
+# Carregar modelo + PCA
+with open('models/best_model_KNN_PCA.pkl', 'rb') as f:
+    data = pickle.load(f)
+    model = data['model']
+    pca = data['pca']
 
 if result.is_submitted:
-
-    # Prepare the image for ML model prediction
+    # Converte imagem 28x28 para vetor (1x784)
     image_for_prediction = np.expand_dims(result.resized_grayscale_array, axis=0)
-
     image_for_prediction = image_for_prediction.reshape(1, -1)
 
-    # Predict digit using a machine learning model
-    prediction = model_sgd.predict(image_for_prediction)
+    # Aplica o PCA treinado (mesmo usado no treino)
+    image_for_prediction_pca = pca.transform(image_for_prediction)
 
-    if  prediction[0]:
-        st.write("O valor digitado é 5")
-    else:
-        st.write("O valor digitado não é 5")
-    st.caption('IA pode cometer erros. Considere verificar informações importantes')
+    # Faz predição
+    prediction = model.predict(image_for_prediction_pca)
+
+    # Mostra o resultado
+    st.subheader("Predição")
+    st.write(f"O número desenhado é: {int(prediction[0])}")
+    st.caption("⚠️ A IA pode errar — verifique o resultado.")
